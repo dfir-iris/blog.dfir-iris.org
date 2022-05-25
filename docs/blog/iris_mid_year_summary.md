@@ -22,7 +22,7 @@ While the project was far from perfect, we privileged the Release Early, Release
 
 From then, we saw a growing interest in the project, a great evolution for the short time it's been published and a definitive place for it in the open source community.   
 
-As of this article, more than 800 commits were added, 21k lines of code wrote, 14k deleted, 63 issues raised, 48 pulls requests submitted and 8 versions released in less than six months. We added new features along the way such as timeline visualizations, sharing links, hooks, processing modules, VT and MISP integrations in beta, you name it. We also greatly improved the stability and reduce bugs while making the platform quicker and more efficient. And we definitely like to thank the community for helping out in achieving this.    
+As of this article, more than 800 commits were added, 21k lines of code wrote, 14k deleted, 63 issues raised, 48 pulls requests submitted and 8 versions released in less than six months. We added new features along the way such as timeline visualizations, sharing links, hooks, processing modules, VT and MISP integrations in beta, you name it. We also greatly improved the stability and reduce bugs while making the platform quicker and more efficient. And we'd definitely like to thank the community for helping out in achieving this.    
 
 Looking forward, we are currently assessing the best options to keep the project going in the right direction and prevent any unfortunate slippage. Motivated by how things went so far, we wish to make the project thrive and evolve on the long run with the help of the community. We have buckets of ideas, and we can't wait to share them. 
 
