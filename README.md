@@ -15,5 +15,5 @@ This blog is built with [MkDocs Materials](https://squidfunk.github.io/mkdocs-ma
 
 ## License
 
-The contents of this repository is available under [LGPL3 license](LICENSE.txt).
+The contents of this repository is available under [CC BY-SA 4.0](LICENSE.txt).
 
