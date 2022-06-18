@@ -10,9 +10,9 @@ description: On December 27th, 2021 we published the very first version of DFIR-
 
 ![banner](../_static/mid_year_review/mid_year_review.jpg)
 
-The idea of DFIR-IRIS was born within the commercial CSIRT of Airbus Cybersecurity, France 2019.
+The idea of DFIR-IRIS is born within the commercial CSIRT of Airbus Cybersecurity in France, 2019.
 
-Following the struggle to share technical details during engagements, and after testing multiple existing tools, we figured a custom solution might be needed to fit the team's needs. The very first draft of DFIR-IRIS saw light, developed by two of the team members.   
+Following the struggle to share technical details during engagements, and after testing multiple existing tools, we figured a custom solution might be needed to fit the team's needs. Consequently the very first draft of DFIR-IRIS was born, developed by two of the team members.   
 
 Long story short, the tool slowly evolved and improved over time, to the rhythm of the incidents. From a single user mode single page application, it slowly became the multi users multi purpose web application better known today.   
 
@@ -27,4 +27,4 @@ As of this article, more than 800 commits were added, 21k lines of code wrote, 1
 Looking forward, we are currently assessing the best options to keep the project going in the right direction and prevent any unfortunate slippage. Motivated by how things went so far, we wish to make the project thrive and evolve on the long run with the help of the community. We have buckets of ideas, and we can't wait to share them. 
 
 *Happy DFIR*  
-*[@whitekernel]() & [@ekto]()*
+*[@whitekernel](https://twitter.com/white_kernel/) & [@ekto](https://twitter.com/ektoplasma_)*

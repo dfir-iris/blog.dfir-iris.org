@@ -1,3 +1,4 @@
 nav:
   - Home: index.md
+  - Deep dives: deep_dives/
   - Tags: tags

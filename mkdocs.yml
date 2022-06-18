@@ -9,11 +9,13 @@ theme:
     - navigation.top
     - navigation.indexes
     - content.code.annotate
+    - content.tabs.link
+
   palette:
     primary: indigo
     accent: indigo
   custom_dir: overrides
-  
+
 
 extra_css:
   - stylesheets/extra.css
@@ -34,6 +36,8 @@ markdown_extensions:
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.tabbed:
+      alternate_style: true 
 
 extra:
   analytics:
@@ -65,6 +69,7 @@ plugins:
   - blogging:
       dirs:
         - blog
+        - deep_dives
       theme:
         name: card
       template: overrides/custom-blog.html
@@ -74,7 +79,12 @@ plugins:
       features:
         tags:
           index_page: tags.md
-          insert: top
+          insert: bottom
+
+      categories:
+        - name: deep_dives
+          dirs:
+            - deep_dives
 
 dev_addr: '127.0.0.1:8080'
 
