@@ -2,17 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://blog.dfir-iris.org/</loc>
-         <lastmod>2022-05-25</lastmod>
+         <lastmod>2022-06-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://blog.dfir-iris.org/deep_dives/</loc>
+         <lastmod>2022-06-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://blog.dfir-iris.org/tags/</loc>
-         <lastmod>2022-05-25</lastmod>
+         <lastmod>2022-06-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://blog.dfir-iris.org/blog/iris_mid_year_summary/</loc>
-         <lastmod>2022-05-25</lastmod>
+         <lastmod>2022-06-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://blog.dfir-iris.org/deep_dives/custom_attributes_dive/</loc>
+         <lastmod>2022-06-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

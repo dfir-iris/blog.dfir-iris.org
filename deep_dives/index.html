@@ -12,21 +12,21 @@
         <meta name="author" content="DFIR-IRIS Team">
       
       
-        <link rel="canonical" href="https://blog.dfir-iris.org/">
+        <link rel="canonical" href="https://blog.dfir-iris.org/deep_dives/">
       
-      <link rel="icon" href="_static/ico_white.png">
+      <link rel="icon" href="../_static/ico_white.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.5">
     
     
       
-        <title>Blog</title>
+        <title>Deep Dives - Blog</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.2d9f7617.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.2d9f7617.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
         
           
           
@@ -45,9 +45,9 @@
       
     
     
-      <link rel="stylesheet" href="stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -75,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#dfir-iris-blog" class="md-skip">
+        <a href="#deep-dives" class="md-skip">
           Skip to content
         </a>
       
@@ -89,9 +89,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Blog" class="md-header__button md-logo" aria-label="Blog" data-md-component="logo">
+    <a href=".." title="Blog" class="md-header__button md-logo" aria-label="Blog" data-md-component="logo">
       
-  <img src="_static/logo-white.png" alt="logo">
+  <img src="../_static/logo-white.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Deep Dives
             
           </span>
         </div>
@@ -186,9 +186,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Blog" class="md-nav__button md-logo" aria-label="Blog" data-md-component="logo">
+    <a href=".." title="Blog" class="md-nav__button md-logo" aria-label="Blog" data-md-component="logo">
       
-  <img src="_static/logo-white.png" alt="logo">
+  <img src="../_static/logo-white.png" alt="logo">
 
     </a>
     Blog
@@ -214,21 +214,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
         Home
       </a>
-      
     </li>
   
 
@@ -241,7 +231,7 @@
   
   
     <li class="md-nav__item">
-      <a href="deep_dives/" class="md-nav__link">
+      <a href="./" class="md-nav__link">
         Deep dives
       </a>
     </li>
@@ -256,7 +246,7 @@
   
   
     <li class="md-nav__item">
-      <a href="tags" class="md-nav__link">
+      <a href="../tags" class="md-nav__link">
         Tags
       </a>
     </li>
@@ -295,11 +285,8 @@
                 
 
 
-<h1 id="dfir-iris-blog">DFIR-IRIS Blog</h1>
+<h1 id="deep-dives">Deep Dives</h1>
 <p>
-
-
-
 
 
 <style>
@@ -349,86 +336,7 @@
     }
 </style>
 
-<style>
-    .blog-override-post {
-        padding: 30px 60px 30px 0;
-        margin-top: 10px;
-        border: 1px solid transparent;
-        cursor: default;
-    }
 
-    .blog-override-post .blog-post-title {
-        color: var(--md-typeset-a-color);
-        margin-top: 0;
-    }
-
-    .blog-post-description {
-        color: var(--md-typeset-color);
-    }
-
-    .blog-override-post:first-of-type {
-        margin-top: 0;
-    }
-
-    .blog-override-post:hover {
-        border: 1px solid #e8e8e877;
-        box-shadow: 3px 4px 10px #e8e8e8;
-    }
-
-    .blog-override-post,
-    .blog-override-post>* {
-        transition: all 0.3s ease-in-out;
-    }
-
-    .blog-override-post:hover>* {
-        transform: translateX(30px);
-    }
-
-    .blog-post-description,
-    .blog-post-extra {
-        opacity: 0.8;
-    }
-
-    .blog-override-post:hover .blog-post-description,
-    .blog-override-post:hover .blog-post-extra {
-        opacity: 1;
-    }
-
-    @media only screen and (max-width: 1000px) {
-        .blog-override-post,
-        .blog-override-post>* {
-            transition: none;
-        }
-
-        .blog-override-post:hover>* {
-            transform: none;
-        }
-
-        .blog-override-post {
-            padding: 30px 0 30px 0;
-            border: none;
-            cursor: pointer;
-        }
-
-        .blog-override-post:hover {
-            border: none;
-            box-shadow: none;
-        }
-
-        .blog-post-description,
-        .blog-post-extra,
-        .blog-override-post:hover .blog-post-description,
-        .blog-override-post:hover .blog-post-extra {
-            opacity: 1;
-        }
-    }
-</style>
-
-<style>
-    .md-typeset .blog-post-description {
-        margin-bottom: 0;
-    }
-</style>
 
 
 
@@ -469,6 +377,8 @@
 
 
 
+
+
 <div class="pages">
     
         
@@ -490,66 +400,30 @@
                     
                 
                 
-                <a href="https://blog.dfir-iris.org/blog/iris_mid_year_summary/">
-    <div class="blog-override-post">
-        <h3 class="blog-post-title">A mid-year review</h3>
-        <div class="blog-post-extra">
-            <b>DFIR-IRIS Team · </b>
-            <span>18/06/22 16:02:55</span>
-        </div>
+                <div class="blog-post">
+    <h3 class="blog-post-title">
+        <a class="link" href="https://blog.dfir-iris.org/deep_dives/custom_attributes_dive/">A deep dive into Custom Attributes</a>
+    </h3>
+    
+        <div class="blogging-tags-grid">
         
-            <div class="blogging-tags-grid">
+        <a href="https://blog.dfir-iris.org/tags#Tips" class="blogging-tag"><code>#Tips</code></a>
         
-        <code style="color: var(--md-typeset-color)">#Story</code>
+        <a href="https://blog.dfir-iris.org/tags#Custom Attributes" class="blogging-tag"><code>#Custom Attributes</code></a>
         
     </div>
     
-            
+        
 
-        
-        <p class="blog-post-description">On December 27th, 2021 we published the very first version of DFIR-IRIS, a free and open source alternative incident response plateforme. Six months have already passed, and it&#39;s time for a short look back on what was achieved.</p>
-    </div>
-</a>
-
-                
-            
-                
-                
-                
-                
-
-                
-                
-                    
-                
-
-                
-                
-                    
-                
-                
-                <a href="https://blog.dfir-iris.org/deep_dives/custom_attributes_dive/">
-    <div class="blog-override-post">
-        <h3 class="blog-post-title">A deep dive into Custom Attributes</h3>
-        <div class="blog-post-extra">
-            <b>whitekernel · </b>
-            <span>18/06/22 16:02:55</span>
-        </div>
-        
-            <div class="blogging-tags-grid">
-        
-        <code style="color: var(--md-typeset-color)">#Tips</code>
-        
-        <code style="color: var(--md-typeset-color)">#Custom Attributes</code>
-        
-    </div>
     
-            
-
-        
-        <p class="blog-post-description">A deep dive into Custom Attributes, a way of extending natives fields in almost any case objects.</p>
+    <p class="blog-post-description">
+        A deep dive into Custom Attributes, a way of extending natives fields in almost any case objects.
+    </p>
+    <div class="blog-post-extra">
+        Published at: 18/06/22 16:02:55
     </div>
-</a>
+    <hr />
+</div>
 
                 
             
@@ -564,7 +438,7 @@
         
     </div>
     
-        <div>Total <b>2</b> posts.</div>
+        <div>Total <b>1</b> posts.</div>
     
 </div></p>
 
@@ -573,7 +447,7 @@
   <small>
     
       Last update:
-      2022-05-25
+      2022-06-18
     
   </small>
 </div>
@@ -591,6 +465,41 @@
       </main>
       
         <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../tags/" class="md-footer__link md-footer__link--next" aria-label="Next: Tags" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Tags
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -653,10 +562,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "navigation.indexes", "content.code.annotate", "content.tabs.link"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.indexes", "content.code.annotate", "content.tabs.link"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
     
     
-      <script src="assets/javascripts/bundle.467223ff.min.js"></script>
+      <script src="../assets/javascripts/bundle.467223ff.min.js"></script>
       
     
   </body>
