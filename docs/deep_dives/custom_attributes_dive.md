@@ -376,7 +376,7 @@ So we can now use this ID and build up our JS.
     }
     ```
 
-We can now remove the new lines of this snippet to place it in the `value` field of our HTML attribute and obtain our final custom attribute. 
+We can now remove the new lines of this snippet and place it in the `value` field of our HTML attribute. This is our final custom attribute !
 
 ```json linenums="1" title="Final Custom attribute definition"
 {
@@ -412,7 +412,7 @@ We save and deploy the new custom attribute, and there we are - we can now selec
 
 ### A final note
 
-We have to admit, **this was far from trivial** :material-emoticon-sick-outline:. We are currently thinking of new ways to improve these types of specific custom attributes, and they will probably get better over time. In the meantime, the solution is always a trick away ! 
+We have to admit, **this was far from trivial** :material-emoticon-sick-outline:. We are currently thinking of new ways to improve these types of specific custom attributes, and they will probably get better over time. In the meantime, we have to trick a little ! 
 
 ## Under the hood
 So how does custom attributes work under the hood ? It's actually simpler than writing one as we did above. :fontawesome-regular-face-smile-beam:   
