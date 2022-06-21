@@ -51,6 +51,7 @@ extra:
       link: mailto:<contact@dfir-iris.org>
     - icon: material/discord
       link: https://discord.gg/76tM6QUJza
+  homepage: https://dfir-iris.org
 
 repo_url: https://github.com/dfir-iris/iris-web
 site_url: https://blog.dfir-iris.org
