@@ -2,3 +2,4 @@ mkdocs-material>=7.2.6
 mkdocs-blogging-plugin==2.0.0
 mkdocs-awesome-pages-plugin==2.7.0
 mkdocs-material-extensions==1.0.3
+mkdocs-awesome-pages-plugin==2.7.0
