@@ -64,7 +64,6 @@ edit_uri: ""
 copyright: Copyright &copy; 2021-2022 - DFIR-IRIS Team
 
 plugins:
-  - git-revision-date
   - search
   - awesome-pages
   - blogging:
