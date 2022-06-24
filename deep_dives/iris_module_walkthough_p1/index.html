@@ -1,0 +1,725 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A series of articles about DFIR-IRIS Modules, introducing the module generator iris-skeleton-module based on cookiecutter.">
+      
+      
+        <meta name="author" content="ekt0">
+      
+      
+        <link rel="canonical" href="https://blog.dfir-iris.org/deep_dives/iris_module_walkthough_p1/">
+      
+      <link rel="icon" href="../../_static/ico_white.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.7">
+    
+    
+      
+        <title>DFIR-IRIS Modules walkthrough Part 1: A Skeleton Dance - Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4a0965b7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  <script defer data-domain="blog.dfir-iris.org" src="https://analytics.dfir-iris.org/js/plausible.js"></script>
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dfir-iris-modules-walkthrough-part-1-a-skeleton-dance" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://dfir-iris.org" title="Blog" class="md-header__button md-logo" aria-label="Blog" data-md-component="logo">
+      
+  <img src="../../_static/logo-white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DFIR-IRIS Modules walkthrough Part 1: A Skeleton Dance
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dfir-iris/iris-web" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DFIR-IRIS Web
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://dfir-iris.org" title="Blog" class="md-nav__button md-logo" aria-label="Blog" data-md-component="logo">
+      
+  <img src="../../_static/logo-white.png" alt="logo">
+
+    </a>
+    Blog
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dfir-iris/iris-web" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DFIR-IRIS Web
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Deep dives
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tags" class="md-nav__link">
+        Tags
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dfir-iris-module-dim-overview" class="md-nav__link">
+    DFIR-IRIS Module (DIM) overview
+  </a>
+  
+    <nav class="md-nav" aria-label="DFIR-IRIS Module (DIM) overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-module" class="md-nav__link">
+    Pipeline module
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processor-module" class="md-nav__link">
+    Processor module
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dims-development" class="md-nav__link">
+    DIMs development
+  </a>
+  
+    <nav class="md-nav" aria-label="DIMs development">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-interface" class="md-nav__link">
+    The interface
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-module-methods" class="md-nav__link">
+    Pipeline module methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processor-module-methods" class="md-nav__link">
+    Processor module methods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iris-skeleton-module-the-dim-generator" class="md-nav__link">
+    Iris-skeleton-module: The DIM generator
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="dfir-iris-modules-walkthrough-part-1-a-skeleton-dance">DFIR-IRIS Modules walkthrough Part 1: A Skeleton Dance</h1>
+<p><img alt="623741343eca6540f8add2fc4d487eb6.png" src="../../_static/deep_dives/iris_module_walkthrough/ddc01dffd7da4011b61fd212abda5651.png" /></p>
+<blockquote>
+<p>The topic of this article is to demonstrate how to get started with the development of a new module, and what structure to follow. To help this purpose, we developed a DFIR-IRIS Module generator called <code>iris-skeleton-module</code> that takes care of all the boilerplate code for either pipeline or processor modules.</p>
+</blockquote>
+<h2 id="dfir-iris-module-dim-overview">DFIR-IRIS Module (DIM) overview</h2>
+<p>Before jumping into the real purpose of this article, let's have an overview on DFIR-IRIS Modules. If you already feel familiar with this topic, you can skip this part and go to the next section.</p>
+<p>IRIS can be extended with modules since its publication on GitHub end of 2021. We call them DFIR-IRIS Modules (DIMs). And no, they are not related to the underwear brand. As the documentation specifies:</p>
+<blockquote>
+<p>A DIM is a Python package allowing to extend IRIS features. DIMs are not running constantly and are only called following specific actions done by users.</p>
+</blockquote>
+<h3 id="pipeline-module">Pipeline module</h3>
+<p>Back then, we could already use <strong>pipeline</strong> modules in order to ingest files from IRIS and process them accordingly. For example, there is a DIM called <code>iris_evtx</code> that ingests EVTX files from IRIS. It converts them in JSON and pushes the result into Splunk.</p>
+<p><img alt="4b5460aa4340c22eaaf3d9a45e3b9e47.png" src="../../_static/deep_dives/iris_module_walkthrough/51cebc325d9e45398aff459cb303694f.png" />
+<strong>Figure 1 - iris-evtx DIM pipeline</strong></p>
+<p>The text input boxes in figure 1 such as <code>index_evtx</code> are pipeline arguments directly passed to the module. More information later in the next section.</p>
+<p>Once the EVTX are processed, the status of the task can be consulted in the "DIM tasks" tab:</p>
+<p><img alt="207a1944d5bb8b5ee4fc32a9017e4a3c.png" src="../../_static/deep_dives/iris_module_walkthrough/4ae16cae8446419787604345173196a9.png" />
+<strong>Figure 2 - iris-evtx DIM task sum up</strong></p>
+<p><img alt="418e44a2c0b30885558242f3aead1bcc.png" src="../../_static/deep_dives/iris_module_walkthrough/a1bc848ef4cf484fa6a485f9e8386e33.png" />
+<strong>Figure 3 - iris-evtx DIM task details</strong></p>
+<h3 id="processor-module">Processor module</h3>
+<p>IRIS v1.4.0 introduced a new type of module, the <strong>processor</strong> module. Processor modules can enrich any case object: Note, Ioc, Asset, Evidence, and even a Case. The most obvious use is the enrichment of the indicators of compromise (IOCs), because during investigations analysts need to qualify any suspicious element they encounter. For example, there is a module called <code>iris_vt_module</code> that enriches some types of IOCs (hashes, IP addresses, domains and URLs) with VirusTotal intelligence.</p>
+<p><img alt="0052bf8c495d135d365c69421cbb8a31.png" src="../../_static/deep_dives/iris_module_walkthrough/836e9db9e5b64cebb2ef3a37aeba7765.png" />
+<strong>Figure 4 - iris-vt-module manual hook</strong></p>
+<p>Thanks to the custom attributes (more insights about this in this previous article <a href="https://blog.dfir-iris.org/deep_dives/custom_attributes_dive/">A deep dive into Custom Attributes</a>), the targeted indicator of compromise gets a new tab called "VT Report", displaying the results of the enrichment with <code>iris-vt-module</code> in a nice way. The module can also directly interact with the attributes of the IOC object: to add a new tag saying it's malicious, a description, etc.</p>
+<p><img alt="9ac05703bc48ac31ceddaf6f3bef03d6.png" src="../../_static/deep_dives/iris_module_walkthrough/10a3274799664f289b6e1bcbc5305bc3.png" />
+<strong>Figure 5 - VirusTotal custom attribute on IOC object</strong></p>
+<p>Processor modules tasks status can also be consulted in the <strong>DIM tasks</strong>.</p>
+<p><img alt="7794b3017305fd8047e53d17f9fa5ad5.png" src="../../_static/deep_dives/iris_module_walkthrough/5ae59970d55e45498c4aa4c8795b2df5.png" />
+<strong>Figure 6 - iris-vt-module DIM task sum up</strong></p>
+<p><img alt="618e91d1d6fdb3c7e90105a6464157c3.png" src="../../_static/deep_dives/iris_module_walkthrough/5833a142b7784e29bb192b7a7b911f43.png" />
+<strong>Figure 7 - iris-vt-module DIM task details</strong></p>
+<p>The task can be triggered manually as shown in figure 4, or automatically. How does it work? IRIS implements a set of hooks triggered before or after an object (e.g. an IOC) is created or updated to the database. The <code>iris-vt-module</code> module uses these hooks to automatically enrich a new IOC. A hook triggered <em>before</em> the object is committed to the database has the <code>on_preload_something</code> prefix. And a hook triggered <em>after</em> the object is committed to the database has the <code>on_postload_something</code> prefix.
+In this scenario, the module registers functions to two different hooks: <code>on_postload_ioc_create</code> and <code>on_postload_ioc_update</code>. If we take the first hook, it means that once an IOC is created in the database, the <code>on_postload_ioc_create</code> hook is triggered. The module then receives both the event and the newly created IOC, executes the task accordingly (e.g: query a domain on VirusTotal and parse the report), and finally adds new information to this IOC (as in figure 5).</p>
+<p>As a final note on this overview, a module cannot be of two types at the moment. Either it's a pipeline module, or it's a processor module (it will matter for the next part). I did not write about how to import and configure a module. If you want more information about this, you can check the documentation: <a href="https://docs.dfir-iris.org/operations/modules/mod_management/">module management</a>.</p>
+<h2 id="dims-development">DIMs development</h2>
+<p>The documentation explains well the structure of DIMs and the interface, so I won't cover it too much. If you want to develop DIMs I heavily recommend to follow this overview and the tutorial: <a href="https://docs.dfir-iris.org/development/modules/">modules development</a>. This section only sums up the purpose of the interface, and adds some tips about DIM development based on my experience.</p>
+<h3 id="the-interface">The interface</h3>
+<p>Both types of DIMs follow the same internal structure. As said earlier, they are Python packages, and they both inherit from a common class named <code>IrisModuleInterface</code>. This interface is included in the Python library <a href="https://github.com/dfir-iris/iris-module-interface">iris-module-interface</a>. Thanks to this interface, the modules implement methods that IRIS recognises and uses to pass data to them and receive results back.</p>
+<p>Let's see a description of important attributes and methods implemented by the interface:</p>
+<ul>
+<li><code>_module_configuration</code> (attribute): A list of dictionaries containing the configuration of the module. It will be shown in the UI of the module management tab. For example, with <code>iris-vt-module</code> you can see below a part of its module_configuration, and how it is rendered in IRIS:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">module_configuration</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="s2">&quot;param_name&quot;</span><span class="p">:</span> <span class="s2">&quot;vt_api_key&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="s2">&quot;param_human_name&quot;</span><span class="p">:</span> <span class="s2">&quot;VT API Key&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="s2">&quot;param_description&quot;</span><span class="p">:</span> <span class="s2">&quot;API key to use to communicate with VT&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="s2">&quot;mandatory&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;sensitive_string&quot;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="p">},</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="p">{</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="s2">&quot;param_name&quot;</span><span class="p">:</span> <span class="s2">&quot;vt_key_is_premium&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="s2">&quot;param_human_name&quot;</span><span class="p">:</span> <span class="s2">&quot;VT Key is premium&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="s2">&quot;param_description&quot;</span><span class="p">:</span> <span class="s2">&quot;Set to True if the VT key is premium&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="s2">&quot;mandatory&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;bool&quot;</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="p">},</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="p">]</span>
+</code></pre></div>
+<p>Code: <a href="https://github.com/dfir-iris/iris-vt-module/blob/master/iris_vt_module/IrisVTConfig.py#L28">IrisVTConfig.py#L28</a></p>
+<p><img alt="56ec62be673d3c161d43692363c5d8f5.png" src="../../_static/deep_dives/iris_module_walkthrough/4e0a4ec4e7fa4ec086661aaa7cf01621.png" />
+<strong>Figure 8 - iris-vt-module configuration management</strong></p>
+<p>As you can see, the configuration can be edited directly from the UI.</p>
+<ul>
+<li><code>_pipeline_info</code> (attribute): Only useful for pipeline modules. It is used to specify arguments expected by the pipeline DIM in addition to receiving files. For example, <code>iris-evtx</code> module needs a Splunk index to push parsed EVTX data to Splunk. If the index does not exist the module will create it, but it still needs a name. To solve that, it asks for a required argument <code>index_evtx</code>. An optional argument <code>hostname_evtx</code> is available if a user wants to force a value in the <code>host</code> field (on Splunk). You can see how it is rendered in figure 1.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">pipeline_info</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="s2">&quot;pipeline_internal_name&quot;</span><span class="p">:</span> <span class="s2">&quot;evtx_pipeline&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s2">&quot;pipeline_human_name&quot;</span><span class="p">:</span> <span class="s2">&quot;EVTX Pipeline&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s2">&quot;pipeline_args&quot;</span><span class="p">:</span> <span class="p">[</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="p">[</span><span class="s1">&#39;index_evtx&#39;</span><span class="p">,</span> <span class="s1">&#39;required&#39;</span><span class="p">],</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="p">[</span><span class="s1">&#39;hostname_evtx&#39;</span><span class="p">,</span> <span class="s1">&#39;optional&#39;</span><span class="p">]</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="p">],</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="s2">&quot;pipeline_update_support&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="s2">&quot;pipeline_import_support&quot;</span><span class="p">:</span> <span class="kc">True</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
+</code></pre></div>
+<p>Code: <a href="https://github.com/dfir-iris/iris-evtx-module/blob/master/iris_evtx/IrisEVTXModConfig.py#L26">IrisEVTXModConfig.py#L26</a></p>
+<ul>
+<li>
+<p><code>module_dict_conf</code> (property): use this property to get the module configuration as set by the users on the UI. The fields are specific to each module. For example, if the IRIS user passed an API key for Virustotal in the <code>iris-vt-module</code> DIM, it can be fetched inside the class using <code>self.module_dict_conf.get("vt_api_key")</code>. See the definition of the configuration fields in <a href="https://github.com/dfir-iris/iris-vt-module/blob/master/iris_vt_module/IrisVTConfig.py">IrisVTConfig.py</a>.</p>
+</li>
+<li>
+<p><code>server_dict_conf</code> (property): use this property to get settings about the IRIS server. It is particularly useful when you need to fetch the proxy parameters that have been set. To get the value: <code>self.server_dict_conf.get('HTTPS_PROXY')</code> or <code>self.server_dict_conf.get('HTTP_PROXY')</code></p>
+</li>
+<li>
+<p><code>get_evidence_storage()</code>: use this method to get the evidence storage. The evidence storage contains the metadata of files ingested from modules, or directly input from the web UI (the <em>Evidences</em> tab) or the API. For example, the pipeline module can use the evidence storage to import the metadata of files successfully processed. That's the case for <code>iris-evtx-module</code>. In figure 1, a few EVTX files have been successfully imported. They are now <em>stored</em> (their metadata actually) in the evidence storage of the case.
+    <img alt="6c3a2f73b2d1087669a73849cebd6e95.png" src="../../_static/deep_dives/iris_module_walkthrough/d5121df0232c42239c29e9a19b59f419.png" />
+    <strong>Figure 9 - Evidences tab</strong></p>
+</li>
+<li>
+<p><code>add_tab_attribute_field(obj, tab_name, field_name, field_type, field_value, mandatory=None, field_options=None)</code>: This method can be used to add a new field to an IRIS object, such as an IOC. That is how <code>iris-vt-module</code> adds a custom attribute in figure 5. More information on <a href="https://github.com/dfir-iris/iris-vt-module/blob/master/iris_vt_module/vt_handler/vt_handler.py#L162">vt_handler.py#L162</a>. <code>add_tab_attribute</code> is not part of the interface and must be imported from IRIS codebase using:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>from app.datamgmt.manage.manage_attribute_db import add_tab_attribute_field
+</code></pre></div>
+<p>We plan to develop a "proxy" function in the module interface to avoid users importing code from IRIS platform. But at least with this example, you can see that it's possible!</p>
+<ul>
+<li>There are other few methods only meant to help IRIS (the platform) identifying the module: its type (<code>get_module_type</code>), its name (<code>get_module_name</code>), its description (<code>get_module_description</code>), etc. As I said, it is only useful for IRIS, you needn't use them in the module code.</li>
+</ul>
+<p>As stated earlier, <code>IrisModuleInterface</code> is a Python interface. It provides method signatures that will be implemented by the inherited modules. Some methods signatures are only useful for pipeline modules, and some others for processor modules. Let's split them in different sections for clarity.</p>
+<h3 id="pipeline-module-methods">Pipeline module methods</h3>
+<p><em>When "not implemented" is specified below, it means that the method signature exists in the interface but its code must be implemented by the module if needed.</em></p>
+<ul>
+<li><code>pipeline_init(app_info)</code> (not implemented): For future uses. This function is called while IRIS initiates. It has to initiate the data needed by the pipeline such as initiating its database.</li>
+<li><code>pipeline_files_upload(base_path, file_handle, case_customer, case_name, is_update)</code> (not implemented): This method is used by IRIS to notify the module that a user initiated a file upload with its pipeline. The module is responsible to saving the file. As illustrated in figures 1 and 9, the EVTX pushed by the user to the EVTX Pipeline are saved by this method. I suggest to use the <code>base_path</code> as the root directory destination for the input files (<code>file_handle</code>)</li>
+<li><code>pipeline_handler(pipeline_type, pipeline_data)</code> (not implemented): this method is called by IRIS after calling <code>pipeline_files_upload</code>. It is meant to notify the module that there are files in the pipeline to process. <code>pipeline_data</code> is actually a dictionary containing different files related to the task:<ul>
+<li><code>pipeline_args</code>: a list of dictionaries containing pipeline arguments</li>
+<li><code>user</code> and <code>user_id</code>: the user who requested the task</li>
+<li><code>case_name</code> and <code>case_id</code>: the case linked to the task</li>
+<li><code>path</code>: the base path containing the files saved in <code>pipeline_files_upload</code>.</li>
+<li><code>is_update</code>: (deprecated) a boolean to know whether the case is being created or updated.</li>
+</ul>
+</li>
+</ul>
+<h3 id="processor-module-methods">Processor module methods</h3>
+<ul>
+<li><code>register_hooks(module_id)</code> (not implemented): This method is called by IRIS upon module registration. This method should call the method <code>register_to_hook</code> for each hook the module wishes to register. The module ID provided by IRIS in this method needs to be provided in every call to <code>register_to_hook</code>.</li>
+<li><code>register_to_hook(module_id, iris_hook_name, manual_hook_name, run_asynchronously)</code>: The purpose of this method is then to register to an IRIS hook. The module ID (given by <code>register_hooks</code>) and <code>iris_hook_name</code> must be set. If <code>is_manual_hook</code> is set in the module configuration, a <code>manual_hook_name</code> can also be set (it will be displayed in the UI) otherwise a name will be automatically built by IRIS from the module and hook name. Finally, if <code>run_asynchronously</code> is set (default), the action will be sent to RabbitMQ and processed asynchronously. Otherwise, the action is immediately handled, which means it needs to be quick otherwise the request will be pending and user experience degraded. Moreover, <code>on_preload</code> hooks (as described in the first section) are synchronous anyway because the object is not yet saved in the database. So the <code>run_asynchronously</code> will be ignored in that case. As an example, here is how the VT DIM registers to the <code>on_postload_create</code> hook: <code>self.register_to_hook(module_id, iris_hook_name='on_postload_ioc_create')</code>. And for a manual hook: <code>self.register_to_hook(module_id, iris_hook_name='on_manual_trigger_ioc', manual_hook_name='Get VT insight')</code>.</li>
+<li><code>deregister_from_hook(module_id, iris_hook_name)</code>: Unregister from an existing hook. The hook_name should be a well-known hook to IRIS. No error are thrown if the hook wasn't register in the first place. For example, the <code>iris-vt-module</code> unregisters to the <code>on_postload_create</code> hook like this: <code>self.deregister_from_hook(module_id=self.module_id, iris_hook_name='on_postload_ioc_create')</code>.</li>
+<li><code>hooks_handler(hook_name, hook_ui_name, data)</code> (not implemented): This is the actual method that receives the events triggered by the IRIS hooks the module previously registered to, thanks to <code>register_hooks</code> method. It receives also an argument called <code>data</code>. For clarity, <code>data</code> is a list of IRIS objects related to the event. It will allow the module to manipulate the objects and add new information. The purpose of <code>hooks_handler</code> is simply to dispatch the received event to a routine.  For example, the VT DIM dispatches the events <code>on_postload_ioc_create</code> and <code>on_postload_ioc_update</code> to the same custom method <code>_handle_ioc</code>. Below you can see a snippet of code borrowed from <code>_handle_ioc</code>. It shows how the <code>data</code> argument is handled. The behaviour of this function depends on the type of IOC (domain, ip, hash...) it received.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># Check that the IOC we receive is of type the module can handle and dispatch</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">if</span> <span class="s1">&#39;ip-&#39;</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">ioc_type</span><span class="o">.</span><span class="n">type_name</span><span class="p">:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="n">status</span> <span class="o">=</span> <span class="n">vt_handler</span><span class="o">.</span><span class="n">handle_vt_ip</span><span class="p">(</span><span class="n">ioc</span><span class="o">=</span><span class="n">element</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="n">in_status</span> <span class="o">=</span> <span class="n">InterfaceStatus</span><span class="o">.</span><span class="n">merge_status</span><span class="p">(</span><span class="n">in_status</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="k">elif</span> <span class="s1">&#39;domain&#39;</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">ioc_type</span><span class="o">.</span><span class="n">type_name</span><span class="p">:</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="n">status</span> <span class="o">=</span> <span class="n">vt_handler</span><span class="o">.</span><span class="n">handle_vt_domain</span><span class="p">(</span><span class="n">ioc</span><span class="o">=</span><span class="n">element</span><span class="p">)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="n">in_status</span> <span class="o">=</span> <span class="n">InterfaceStatus</span><span class="o">.</span><span class="n">merge_status</span><span class="p">(</span><span class="n">in_status</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="k">elif</span> <span class="n">element</span><span class="o">.</span><span class="n">ioc_type</span><span class="o">.</span><span class="n">type_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;md5&#39;</span><span class="p">,</span> <span class="s1">&#39;sha224&#39;</span><span class="p">,</span> <span class="s1">&#39;sha256&#39;</span><span class="p">,</span> <span class="s1">&#39;sha512&#39;</span><span class="p">]:</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        <span class="n">status</span> <span class="o">=</span> <span class="n">vt_handler</span><span class="o">.</span><span class="n">handle_vt_hash</span><span class="p">(</span><span class="n">ioc</span><span class="o">=</span><span class="n">element</span><span class="p">)</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="n">in_status</span> <span class="o">=</span> <span class="n">InterfaceStatus</span><span class="o">.</span><span class="n">merge_status</span><span class="p">(</span><span class="n">in_status</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;IOC type </span><span class="si">{</span><span class="n">element</span><span class="o">.</span><span class="n">ioc_type</span><span class="o">.</span><span class="n">type_name</span><span class="si">}</span><span class="s1"> not handled by VT module. Skipping&#39;</span><span class="p">)</span>
+</code></pre></div>
+Code: <a href="https://github.com/dfir-iris/iris-vt-module/blob/master/iris_vt_module/IrisVTInterface.py#L127">IrisVTInterface#L127</a></li>
+</ul>
+<p>To conclude this section, we have seen what parts the module interface provides. Processor and pipeline module share the same codebase, but they use different methods. One must handle files (pipeline), and the other must handle IRIS objects from events based on hooks.</p>
+<h2 id="iris-skeleton-module-the-dim-generator">Iris-skeleton-module: The DIM generator</h2>
+<p>Despite the module interface, there is still a lot of boilerplate code to take into account when developing a new module. Boilerplate code are sections of code that are repeated in multiple modules - in this case - with little to no variation. For example <code>iris-vt-module</code> and <code>iris-misp-module</code>, both processor DIMs, share approximately 50% of the same code.</p>
+<p>In consequence, we developed (and published!) a DIM generator <img alt="🎉" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f389.svg" title=":tada:" /> : <a href="https://github.com/dfir-iris/iris-skeleton-module">iris-skeleton-module</a>. Iris-Skeleton is a module generator based on <a href="https://github.com/cookiecutter/cookiecutter">cookiecutter</a> and inspired by <a href="https://github.com/TezRomacH/python-package-template">python-package-template</a>. It is very simple to use, and it generates a new repository based on a template.</p>
+<p>To get started, <code>cookiecutter</code> package must be installed: <code>pip install -U cookiecutter</code>. Then go to a directory where you want to create your DIM and run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cookiecutter gh:dfir-iris/iris-skeleton-module
+</code></pre></div>
+<p>In order to generate the project, cookiecutter will ask for various <a href="https://github.com/dfir-iris/iris-skeleton-module#input-variables">input variables</a>. To sum up, it asks for a new module name, a keyword (e.g. for <code>iris-vt-module</code>, the keyword is VT, for <code>iris-evtx</code>, the keyword is EVTX), and a module description. It also asks for general information (email, license...) in order to generate the LICENSE.txt file, code headers, and the <code>setup.py</code> file. A Makefile is also generated. Finally, cookiecutter asks whether a pipeline or a processor module must be generated (remember that we can't have both at the same time <img alt="🙂" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f642.svg" title=":slight_smile:" />).</p>
+<p>Once generated, the project will contain various files:</p>
+<ul>
+<li>the LICENSE.txt file</li>
+<li>the README file (very basic)</li>
+<li>the <code>setup.py file</code> filled with provided information</li>
+<li>the Makefile, to build, install, or clean the project with ease</li>
+<li>and last but not least, the module code itself. All the boilerplate code for the chosen type of module is already there, and even some pieces of example code and module configuration.</li>
+</ul>
+<p>Let's create together the <code>iris-toto-module</code> pipeline DIM, in order to show you the process.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ pip install -U cookiecutter <span class="c1"># Install cookiecutter into your Py env</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># Here you can customise your new module. Default values are between [].</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>module_name <span class="o">[</span>iris-toto-module<span class="o">]</span>: iris-toto-module
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>keyword <span class="o">[</span>toto<span class="o">]</span>: TOTO
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>module_description <span class="o">[</span><span class="sb">`</span>iris-toto-module<span class="sb">`</span> is a IRIS pipeline/processor module created with https://github.com/dfir-iris/iris-skeleton-module<span class="o">]</span>: 
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>organization <span class="o">[</span>iris-toto-module<span class="o">]</span>: TotoCorp
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Select license:
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="m">1</span> - MIT
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="m">2</span> - BSD-3
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="m">3</span> - GNU GPL v3.0
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="m">4</span> - Lesser GNU GPL v3.0
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="m">5</span> - Apache Software License <span class="m">3</span>.0
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>Choose from <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span>, <span class="m">5</span> <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="m">4</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>github_name <span class="o">[</span>totocorp<span class="o">]</span>: 
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>email <span class="o">[</span>hello@totocorp.com<span class="o">]</span>: demo@totocorp.org
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>version <span class="o">[</span><span class="m">0</span>.1.0<span class="o">]</span>: 
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>Select support:
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="m">1</span> - pipeline
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="m">2</span> - processor
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>Choose from <span class="m">1</span>, <span class="m">2</span> <span class="o">[</span><span class="m">1</span><span class="o">]</span>: 
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>Your module iris-toto-module is created.
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="m">1</span><span class="o">)</span> Now you can start working on it:
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>    $ <span class="nb">cd</span> iris-toto-module <span class="o">&amp;&amp;</span> git init
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="m">2</span><span class="o">)</span> If you dont have pip install it
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="m">3</span><span class="o">)</span> Run the make <span class="nb">command</span> to use pip to build the wheel package or install <span class="k">in</span> your environment
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>    $ make wheel
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>    $ make install
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="m">4</span><span class="o">)</span> Upload initial code to GitHub:
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>    $ git add .
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>    $ git commit -m <span class="s2">&quot;:tada: Initial commit&quot;</span>
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>    $ git branch -M main
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>    $ git remote add origin https://github.com/totocorp/iris-toto-module.git
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>    $ git push -u origin main
+<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="m">5</span><span class="o">)</span> grep -r <span class="s2">&quot;TODO&quot;</span> <span class="c1"># to check what parts you should code</span>
+<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>For more information on how to develop IRIS modules, please consider reading the documentation: https://docs.dfir-iris.org/development/modules/.
+<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>Good luck!
+<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>
+<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>$ <span class="nb">cd</span> iris-toto-module
+<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>iris-toto-module $ ls
+<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>AUTHORS.txt  iris_toto_module  LICENSE  Makefile  README.md  setup.py
+<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>iris-toto-module $ <span class="nb">cd</span> iris_toto_module
+<a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>iris-toto-module/iris_toto_module $ ls
+<a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>__init__.py  IrisTotoConfig.py  IrisTotoInterface.py  toto_handler
+<a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>iris-toto-module/iris_toto_module $ <span class="nb">cd</span> toto_handler
+<a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a>iris-toto-module/iris_toto_module/toto_handler $ ls
+<a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a>__init__.py  toto_handler.py
+<a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a>iris-toto-module/iris_toto_module/toto_handler $ <span class="nb">cd</span> ../..
+<a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a>iris-toto-module $ make wheel
+<a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a>pip wheel .
+<a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a>Processing iris-toto-module
+<a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a>  Preparing metadata <span class="o">(</span>setup.py<span class="o">)</span> ... <span class="k">done</span>
+<a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a>Building wheels <span class="k">for</span> collected packages: iris-toto-module
+<a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a>  Building wheel <span class="k">for</span> iris-toto-module <span class="o">(</span>setup.py<span class="o">)</span> ... <span class="k">done</span>
+<a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a>  Created wheel <span class="k">for</span> iris-toto-module: <span class="nv">filename</span><span class="o">=</span>iris_toto_module-0.1.0-py3-none-any.whl <span class="nv">size</span><span class="o">=</span><span class="m">9302</span> <span class="nv">sha256</span><span class="o">=</span>5af16b1bad27b9a8f0c82c223e0939c2c57de44b24e367a65f3d38babbc1b90b
+<a id="__codelineno-5-56" name="__codelineno-5-56" href="#__codelineno-5-56"></a>  Stored <span class="k">in</span> directory: /home/toto/.cache/pip/wheels/7b/40/f9/adce2221081fd31117daadee7d34715b7ff076412f592e45a0
+<a id="__codelineno-5-57" name="__codelineno-5-57" href="#__codelineno-5-57"></a>Successfully built iris-toto-module
+</code></pre></div>
+<p>And that's all for the module generation! Now you can follow the instructions and consult the different source code files to get familiar with it. You can also generate a processor module in parallel to see the difference.</p>
+<p>Thanks to <code>iris-skeleton-module</code>, it is now very accessible to develop new modules. The generated modules can even be installed as is. Of course, they don't <em>do</em> anything special, they just print some string in the task status when used. But it shows that they already have all the necessary code to handle inputs from IRIS, and send back the results.</p>
+<p>Feel free to use it and tailor the template to your needs (and send PR <img alt="😁" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f601.svg" title=":grin:" />). We plan to add more input variables to cookiecutter in order to generate even more repetitive code, such as module configuration or pipeline argument dictionaries. If you develop new modules and want to share it with the community, we would be glad to add it to our organization or put a reference to your repository!</p>
+<p>The second part of this walkthrough will show the complete development of a pipeline - or maybe processor too <img alt="😉" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f609.svg" title=":wink:" /> - module using <code>iris-skeleton-module</code>. At the end, it will be published in the <a href="https://github.com/dfir-iris">dfir-iris organization</a>.</p>
+<p>If you want to get updates from our blog, the best way is to follow us on <a href="https://twitter.com/dfir_iris">Twitter</a> or join or <a href="https://discord.com/invite/76tM6QUJza">Discord</a> <img alt="👍" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" title=":thumbsup:" />. If you have comments or questions you can reach us on Twitter, Discord, Matrix.org, and at the email address contact@dfir-iris.org.</p>
+<p><br/></p>
+<div class="blogging-tags-grid">
+
+        <a href="https://blog.dfir-iris.org/tags#Walkthrough" class="blogging-tag"><code>#Walkthrough</code></a>
+
+        <a href="https://blog.dfir-iris.org/tags#Tips" class="blogging-tag"><code>#Tips</code></a>
+
+        <a href="https://blog.dfir-iris.org/tags#Module" class="blogging-tag"><code>#Module</code></a>
+
+    </div>
+
+<style>
+    .md-typeset .blogging-tags-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 5px;
+    }
+
+    .md-typeset .blogging-tag {
+        color: var(--md-typeset-color);
+        background-color: var(--md-typeset-code-color);
+    }
+
+    .md-typeset .blogging-tag code {
+        border-radius: 5px;
+    }
+</style>
+
+              
+            </article>
+            
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../custom_attributes_dive/" class="md-footer__link md-footer__link--prev" aria-label="Previous: A deep dive into Custom Attributes" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              A deep dive into Custom Attributes
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021-2022 - DFIR-IRIS Team
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dfir_iris" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/dfir-iris" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:<contact@dfir-iris.org>" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="m511.6 36.86-64 415.1a32.008 32.008 0 0 1-31.65 27.147c-4.188 0-8.319-.815-12.29-2.472l-122.6-51.1-50.86 76.29C226.3 508.5 219.8 512 212.8 512c-11.5 0-20.8-9.3-20.8-20.8v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96 122.3 360.3 19.69 317.5C8.438 312.8.812 302.2.062 289.1s5.47-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/76tM6QUJza" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22 24-5.25-5 .63 2H4.5A2.5 2.5 0 0 1 2 18.5v-15A2.5 2.5 0 0 1 4.5 1h15A2.5 2.5 0 0 1 22 3.5V24M12 6.8c-2.68 0-4.56 1.15-4.56 1.15 1.03-.92 2.83-1.45 2.83-1.45l-.17-.17c-1.69.03-3.22 1.2-3.22 1.2-1.72 3.59-1.61 6.69-1.61 6.69 1.4 1.81 3.48 1.68 3.48 1.68l.71-.9c-1.25-.27-2.04-1.38-2.04-1.38S9.3 14.9 12 14.9s4.58-1.28 4.58-1.28-.79 1.11-2.04 1.38l.71.9s2.08.13 3.48-1.68c0 0 .11-3.1-1.61-6.69 0 0-1.53-1.17-3.22-1.2l-.17.17s1.8.53 2.83 1.45c0 0-1.88-1.15-4.56-1.15m-2.07 3.79c.65 0 1.18.57 1.17 1.27 0 .69-.52 1.27-1.17 1.27-.64 0-1.16-.58-1.16-1.27 0-.7.51-1.27 1.16-1.27m4.17 0c.65 0 1.17.57 1.17 1.27 0 .69-.52 1.27-1.17 1.27-.64 0-1.16-.58-1.16-1.27 0-.7.51-1.27 1.16-1.27Z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "navigation.indexes", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.0238f547.min.js"></script>
+      
+    
+  </body>
+</html>
