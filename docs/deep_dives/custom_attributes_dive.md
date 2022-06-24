@@ -20,10 +20,10 @@ We will :
 
 Heading to the attributes administration page in `Advanced` > `Custom Attributes`, we open the custom attributes for Evidences. 
 
-![CA](../_static/tips/custom_attributes_fun/ca_evidence_page.png)
+![CA](../_static/deep_dives/custom_attributes_fun/ca_evidence_page.png)
 
 The window should looks like this unless you already added some custom attributes.  
-![CA](../_static/tips/custom_attributes_fun/ca_evidence_window.png)
+![CA](../_static/deep_dives/custom_attributes_fun/ca_evidence_window.png)
 
 The right text input allows us to describe the custom attributes thanks to a simple JSON formatting. They are defined as follow : 
 ```json  linenums="1"
@@ -72,7 +72,7 @@ By setting `mandatory` to false, we ensure the creation/update of Evidences are 
 
 Now it's time to ensure our attributes are rendered as expected. Let's click on `preview`, and then on the - hopefully - new tab `Analysis` on the preview.   
 
-![CA](../_static/tips/custom_attributes_fun/ca_evidence_preview.png)
+![CA](../_static/deep_dives/custom_attributes_fun/ca_evidence_preview.png)
 
 There we go ! 
 
@@ -81,7 +81,7 @@ We can now deploy our changes to the Evidence objects. Curious about how it's ha
 We will deploy the changes to all Evidences objects but not force the overwrite if some of them already have attributes. We close the preview and we click on `Update`. Depending on how many Evidences you have, this can take a little time, but once the update is finished, all Evidences objects should have our new custom attributes.   
 We head to the Evidence section of one of our case, click on one of them or try to add one, and we should have a beautiful new tab in our Evidence. 
 
-![CA](../_static/tips/custom_attributes_fun/ca_evidence_check.png)
+![CA](../_static/deep_dives/custom_attributes_fun/ca_evidence_check.png)
 
 Input a few notes, check the box and click on `Update`. The data is now saved with the object.  Time to celebrate ! :material-party-popper:
 
@@ -114,7 +114,7 @@ Let's take the previous Evidence custom attribute and add a new `html` entry to 
 }
 ```
 Which gives 
-![CA](../_static/tips/custom_attributes_fun/ca_evidence_add_html.png)
+![CA](../_static/deep_dives/custom_attributes_fun/ca_evidence_add_html.png)
 
 Nice, we can now add raw HTML to our custom attribute. IRIS uses [Bootstrap](https://bootstrap.com) to ease the UI/UX interface, so we can directly reuse these components. Let's replace the `h3` with a Bootstrap Select. 
 
@@ -197,7 +197,7 @@ If you preview this, you'll notice that you see nothing. That's because we need 
 
 We can now preview it. 
 
-![CA](../_static/tips/custom_attributes_fun/ca_analysts.png)
+![CA](../_static/deep_dives/custom_attributes_fun/ca_analysts.png)
 
 Good, we're on the right way ! 
 
@@ -259,7 +259,7 @@ Let's break it down a little.
 
 If we now look at this new code, we should see the list of analysts. 
 
-![CA](../_static/tips/custom_attributes_fun/ca_evidence_prev_analyst.png)
+![CA](../_static/deep_dives/custom_attributes_fun/ca_evidence_prev_analyst.png)
 
 We are getting close ! Now, if you deploy these changes and try to save the information of our tab, you'll see that it doesn't work and only the `Analysis note` and `Has been analyzed` fields are saved. The `Analyst` information is lost.   
 
@@ -407,7 +407,7 @@ We can now remove the new lines of this snippet and place it in the `value` fiel
 
 We save and deploy the new custom attribute, and there we are - we can now select a user and save it !  
 
-![CA](../_static/tips/custom_attributes_fun/ca_final.png)
+![CA](../_static/deep_dives/custom_attributes_fun/ca_final.png)
 
 
 ### A final note
@@ -418,7 +418,7 @@ We have to admit, **this was far from trivial** :material-emoticon-sick-outline:
 So how does custom attributes work under the hood ? It's actually simpler than writing one as we did above. :fontawesome-regular-face-smile-beam:   
 Each case objects table in the DB holds a `custom_attributes` field, which is of type `JSON`.  For instance, below is the DB declaration of the Notes.  
 
-![CA](../_static/tips/custom_attributes_fun/ca_db.png)
+![CA](../_static/deep_dives/custom_attributes_fun/ca_db.png)
 
 When a custom attribute is created, let's say for Notes, IRIS loops over all existing Notes and apply the JSON structure you just wrote. All of the Notes are now holding this custom attribute.   
 
@@ -471,7 +471,7 @@ You may notice that [line 18](#__codelineno-13-18), the `HTML` type directly wri
 Now, when the data is saved in the object, the client sends a JSON containing the original objet fields, as well as the custom attributes information.   
 With the example in [Basic Example](#__codelineno-1-1), let's take a look on what happens when the data is saved.  
 
-![CA](../_static/tips/custom_attributes_fun/ca_save_1.png)
+![CA](../_static/deep_dives/custom_attributes_fun/ca_save_1.png)
 
 Looking at the request emitted upon Update, we can see a POST towards `case/evidences/update/XX`. This is the update endpoint. The payload of the request contains the standard fields of the Evidences, as well as the custom attributes. 
 
