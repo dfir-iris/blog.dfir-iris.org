@@ -77,8 +77,8 @@ plugins:
         from: new 
         by: creation
 
-      time_format: '%d/%m/%y %H:%M:%S'
-      meta_time_format: '%Y-%m-%d %H:%M:%S'
+      time_format: '%d-%m-%Y'
+      meta_time_format: '%d-%m-%Y'
       features:
         tags:
           index_page: tags.md

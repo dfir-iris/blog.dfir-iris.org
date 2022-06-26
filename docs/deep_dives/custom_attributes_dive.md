@@ -4,6 +4,7 @@ tags:
   - Custom Attributes
 author: whitekernel
 description: A deep dive into Custom Attributes, a way of extending natives fields in almost any case objects.
+date: "18-06-2022"
 ---
 
 

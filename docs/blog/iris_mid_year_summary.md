@@ -3,6 +3,7 @@ tags:
   - Story
 author: DFIR-IRIS Team
 description: On December 27th, 2021 we published the very first version of DFIR-IRIS, a free and open source alternative incident response plateforme. Six months have already passed, and it's time for a short look back on what was achieved.  
+date: "25-05-2022"
 ---
 
 

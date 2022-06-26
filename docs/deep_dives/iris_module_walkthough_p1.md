@@ -5,6 +5,7 @@ tags:
   - Module
 author: ekt0
 description: A series of articles about DFIR-IRIS Modules, introducing the module generator iris-skeleton-module based on cookiecutter.
+date: "25-06-2022"
 ---
 
 # DFIR-IRIS Modules walkthrough Part 1: A Skeleton Dance
@@ -274,4 +275,4 @@ Feel free to use it and tailor the template to your needs (and send PR :grin:). 
 
 The second part of this walkthrough will show the complete development of a pipeline - or maybe processor too :wink: - module using `iris-skeleton-module`. At the end, it will be published in the [dfir-iris organization](https://github.com/dfir-iris).
 
-If you want to get updates from our blog, the best way is to follow us on [Twitter](https://twitter.com/dfir_iris) or join or [Discord](https://discord.com/invite/76tM6QUJza) :thumbsup:. If you have comments or questions you can reach us on Twitter, Discord, Matrix.org, and at the email address contact@dfir-iris.org.
+If you want to get updates from our blog, the best way is to follow us on [Twitter](https://twitter.com/dfir_iris) or join our [Discord](https://discord.com/invite/76tM6QUJza) :thumbsup:. If you have comments or questions you can reach us on Twitter, Discord, Matrix.org, and at the email address contact@dfir-iris.org.
