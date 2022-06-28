@@ -75,19 +75,19 @@ Now it's time to ensure our attributes are rendered as expected. Let's click on 
 
 ![CA](../_static/deep_dives/custom_attributes_fun/ca_evidence_preview.png)
 
-There we go ! 
+There we go! 
 
-We can now deploy our changes to the Evidence objects. Curious about how it's handled under the hood ? You can take a look a the deep dive section [Under the hood](#under-the-hood).   
+We can now deploy our changes to the Evidence objects. Curious about how it's handled under the hood? You can take a look a the deep dive section [Under the hood](#under-the-hood).   
 
 We will deploy the changes to all Evidences objects but not force the overwrite if some of them already have attributes. We close the preview and we click on `Update`. Depending on how many Evidences you have, this can take a little time, but once the update is finished, all Evidences objects should have our new custom attributes.   
 We head to the Evidence section of one of our case, click on one of them or try to add one, and we should have a beautiful new tab in our Evidence. 
 
 ![CA](../_static/deep_dives/custom_attributes_fun/ca_evidence_check.png)
 
-Input a few notes, check the box and click on `Update`. The data is now saved with the object.  Time to celebrate ! :material-party-popper:
+Input a few notes, check the box and click on `Update`. The data is now saved with the object.  Time to celebrate! :material-party-popper:
 
 ## Dynamic custom attributes 
-That's great, but now what if we want to add the possibility to specify who analyzed the Evidence ? We could add a new text input, but let's make something a little more advanced by proposing a list of all the analysts on the platform.  
+That's great, but now what if we want to add the possibility to specify who analyzed the Evidence? We could add a new text input, but let's make something a little more advanced by proposing a list of all the analysts on the platform.  
 
 ### Raw HTML fields
 There is no direct way of proposing a list of analysts with standard custom attributes, however we have the powerful `html` type and thanks to that we can input HTML and so Javascript.  HTML custom attributes are not processed by IRIS and are rendered as-is in the objects. 
@@ -200,7 +200,7 @@ We can now preview it.
 
 ![CA](../_static/deep_dives/custom_attributes_fun/ca_analysts.png)
 
-Good, we're on the right way ! 
+Good, we're on the right way! 
 
 ### Requesting external resources
 We now need to fill the select picker with the available analysts names. Fortunately, we have an [API endpoint](https://docs.dfir-iris.org/_static/iris_api_reference_v1.0.3.html) for that and we can add some JS to request it and fill our `select`. There's a few JS glue already written within IRIS, so we're going to use that to ease the writing.  
@@ -262,7 +262,7 @@ If we now look at this new code, we should see the list of analysts.
 
 ![CA](../_static/deep_dives/custom_attributes_fun/ca_evidence_prev_analyst.png)
 
-We are getting close ! Now, if you deploy these changes and try to save the information of our tab, you'll see that it doesn't work and only the `Analysis note` and `Has been analyzed` fields are saved. The `Analyst` information is lost.   
+We are getting close! Now, if you deploy these changes and try to save the information of our tab, you'll see that it doesn't work and only the `Analysis note` and `Has been analyzed` fields are saved. The `Analyst` information is lost.   
 
 That's because HTML custom attributes cannot be saved by users, otherwise this would open the platform to a multitude of vulnerabilities. Please see section [Values saving](#values-saving) for more information.  
 
@@ -300,7 +300,7 @@ So let's add an `input_string` field named `User ID` in our custom attribute, ju
 
 Now, the idea is to detect a change in the dropdown, put the value in the new `input_string` field to save our data. And then upon load, check the value in the input field and select the corresponding value in the dropdown.  
 
-**But how can we know the ID of the new input field we created ?**  
+**But how can we know the ID of the new input field we created?**  
 The generator actually uses a convention, and the field will always have the same name if it stays at the same position in the custom attribute. If you save the current attribute and check the ID of the field with the browser debugger, you will see `inpstd_2_user_id` (i.e *standard input* in position  *2* named *user id*).  
 
 So we can now use this ID and build up our JS.  
@@ -377,7 +377,7 @@ So we can now use this ID and build up our JS.
     }
     ```
 
-We can now remove the new lines of this snippet and place it in the `value` field of our HTML attribute. This is our final custom attribute !
+We can now remove the new lines of this snippet and place it in the `value` field of our HTML attribute. This is our final custom attribute!
 
 ```json linenums="1" title="Final Custom attribute definition"
 {
@@ -406,17 +406,17 @@ We can now remove the new lines of this snippet and place it in the `value` fiel
 }
 ```
 
-We save and deploy the new custom attribute, and there we are - we can now select a user and save it !  
+We save and deploy the new custom attribute, and there we are - we can now select a user and save it!  
 
 ![CA](../_static/deep_dives/custom_attributes_fun/ca_final.png)
 
 
 ### A final note
 
-We have to admit, **this was far from trivial** :material-emoticon-sick-outline:. We are currently thinking of new ways to improve these types of specific custom attributes, and they will probably get better over time. In the meantime, we have to trick a little ! 
+We have to admit, **this was far from trivial** :material-emoticon-sick-outline:. We are currently thinking of new ways to improve these types of specific custom attributes, and they will probably get better over time. In the meantime, we have to trick a little! 
 
 ## Under the hood
-So how does custom attributes work under the hood ? It's actually simpler than writing one as we did above. :fontawesome-regular-face-smile-beam:   
+So how does custom attributes work under the hood? It's actually simpler than writing one as we did above. :fontawesome-regular-face-smile-beam:   
 Each case objects table in the DB holds a `custom_attributes` field, which is of type `JSON`.  For instance, below is the DB declaration of the Notes.  
 
 ![CA](../_static/deep_dives/custom_attributes_fun/ca_db.png)
@@ -464,7 +464,7 @@ Let's break it down and simplify it.
 ```
 
 The templates loops over all attributes in the custom attribute JSON definition, and depending on the `type` of field, write a corresponding HTML tag.   
-You may notice that [line 18](#__codelineno-13-18), the `HTML` type directly writes the `value` on the template. That's what allows us to write raw HTML with Javascript !   
+You may notice that [line 18](#__codelineno-13-18), the `HTML` type directly writes the `value` on the template. That's what allows us to write raw HTML with Javascript!   
 
 
 ### Values saving
@@ -500,7 +500,7 @@ When receiving the data, IRIS operates a merge.
 3. Searches for a tab named `Analysis` in the loaded JSON
 4. Within it searches for a field named `Analysis note`, and sets its `value` to `Hello world`
 5. Within the same tab, searches for a field named `Has been analyzed` and sets its `value` to true.  
-6. Saves the JSON back in the Evidence. The data is saved !
+6. Saves the JSON back in the Evidence. The data is saved!
 
 Now the custom attribute field of the Evidence looks like this : 
 
@@ -557,7 +557,7 @@ Let's consider an `HTML` field such as follow :
     }
 }
 ```
-What if a user sends a request to update this field ? For instance : 
+What if a user sends a request to update this field? For instance : 
 
 ```json hl_lines="9" linenums="1" title="Malicious Evidence update POST payload"
 {
@@ -577,7 +577,7 @@ What if a user sends a request to update this field ? For instance :
 This would let the user rewrite the HTML attribute in the Evidence object. The next time another user requests this Evidence, IRIS would read the `value` of the attribute `Analysis header`, renders the malicious payload and presents it to this user.  
 **To avoid this, `HTML` field types are read-only for users.** They can't update them.    
 
-And we're done for this deep dive !  :fontawesome-regular-face-smile-beam:
+And we're done for this deep dive!  :fontawesome-regular-face-smile-beam:
 
 That's a long one, but hopefully this brings some lights on how the custom attributes are working behind the scene.   
 Don't hesitate to [contact us](https://docs.dfir-iris.org/contact/), should you have any questions or remarks.    
